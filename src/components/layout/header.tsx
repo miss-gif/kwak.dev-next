@@ -1,6 +1,7 @@
 import Inner from "@/components/layout/inner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { GlobeIcon } from "lucide-react";
 import Link from "next/link";
 
 const NAV_ITEMS = [
@@ -10,11 +11,13 @@ const NAV_ITEMS = [
 
 const Header = () => {
   return (
-    <header className="border-b border-b-slate-200">
+    <header>
       <Inner>
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4 w-full">
-            <h1 className="text-xl font-bold">Kwak.dev</h1>
+            <h1 className="text-xl font-bold">
+              <Link href={"/"}>Kwak.dev</Link>
+            </h1>
 
             <ul className="flex gap-4">
               {NAV_ITEMS.map((item) => (
@@ -29,7 +32,8 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" className="text-sm">
+            <Button variant="ghost" className="text-sm">
+              <GlobeIcon />
               한국어
             </Button>
             <Button variant="default" className="text-sm">
