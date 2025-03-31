@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -18,8 +19,9 @@ export function LoginDialog() {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle className="sr-only">로그인</DialogTitle>
+        <DialogHeader className="sr-only">
+          <DialogTitle>로그인</DialogTitle>
+          <DialogDescription>로그인 Dialog 입니다.</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
           <div className="text-center text-4xl font-semibold pt-5 pb-8">

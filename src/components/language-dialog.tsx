@@ -2,14 +2,15 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { GlobeIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { GlobeIcon } from "lucide-react";
 
 export function LanguageDialog() {
   return (
@@ -23,6 +24,9 @@ export function LanguageDialog() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>언어설정</DialogTitle>
+          <DialogDescription className="sr-only">
+            언어설정 Dialog 입니다.
+          </DialogDescription>
         </DialogHeader>
 
         <RadioGroup defaultValue="default">
