@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,9 @@ export function LoginDialog() {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader></DialogHeader>
+        <DialogHeader>
+          <DialogTitle className="sr-only">로그인</DialogTitle>
+        </DialogHeader>
         <div className="grid gap-4">
           <div className="text-center text-4xl font-semibold pt-5 pb-8">
             Kwak.dev
