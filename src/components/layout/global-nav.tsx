@@ -13,6 +13,7 @@ const navItems = [
   { href: "/attendance", label: "출석체크" },
   { href: "/points", label: "포인트" },
   { href: "/preview", label: "프리뷰" },
+  { href: "/todos", label: "Todos" },
 ];
 
 const GlobalNav = () => {
