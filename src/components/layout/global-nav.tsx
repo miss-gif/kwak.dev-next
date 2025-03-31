@@ -30,7 +30,7 @@ const GlobalNav = ({
       <Inner>
         <div className="flex items-center gap-8 py-2">
           <div
-            className="flex justify-center items-center flex-col text-xs  gap-1"
+            className="flex justify-center items-center flex-col text-xs gap-1 cursor-pointer"
             onClick={handleSearchClick}
           >
             <SearchIcon size={18} />
