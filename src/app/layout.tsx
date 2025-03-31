@@ -5,6 +5,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import TopBanner from "@/components/layout/top-banner";
 import GlobalNav from "@/components/layout/global-nav";
+import Inner from "@/components/layout/inner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,9 @@ export default function RootLayout({
         <TopBanner />
         <Header />
         <GlobalNav />
-        <main>{children}</main>
+        <Inner className="min-h-dvh">
+          <main>{children}</main>
+        </Inner>
         <Footer />
       </body>
     </html>
