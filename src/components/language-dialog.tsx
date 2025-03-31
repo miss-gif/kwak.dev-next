@@ -1,3 +1,8 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,46 +17,58 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { GlobeIcon } from "lucide-react";
-import { useState } from "react";
+
+const languageOptions = [
+  { value: "ko", label: "한국어" },
+  { value: "en", label: "English" },
+  { value: "ja", label: "日本語" },
+];
 
 export function LanguageDialog() {
-  const [languageValue, setLanguageValue] = useState("한국어");
-  const [selectedLanguage, setSelectedLanguage] = useState(languageValue);
+  const router = useRouter();
+  const [currentLanguage, setCurrentLanguage] = useState("ko"); // 쿠키에서 가져온 현재 언어
+  const [selectedLanguage, setSelectedLanguage] = useState("ko"); // 사용자가 선택한 언어
+
+  useEffect(() => {
+    // 쿠키에서 현재 언어 불러오기
+    const savedLocale = Cookies.get("NEXT_LOCALE") || "ko";
+    setCurrentLanguage(savedLocale);
+    setSelectedLanguage(savedLocale); // 초기 선택값도 설정
+  }, []);
 
   const handleLanguageChange = () => {
-    setLanguageValue(selectedLanguage);
+    setCurrentLanguage(selectedLanguage); // 버튼을 눌러야 현재 언어가 변경됨
+    Cookies.set("NEXT_LOCALE", selectedLanguage, { expires: 365 });
+    router.refresh();
   };
-
-  const languages = [
-    { value: "한국어", label: "한국어" },
-    { value: "English", label: "English" },
-    { value: "日本語", label: "日本語" },
-  ];
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="text-sm">
+        <Button variant="ghost" className="text-sm flex items-center gap-2">
           <GlobeIcon />
-          {languageValue}
+          {
+            languageOptions.find((lang) => lang.value === currentLanguage)
+              ?.label
+          }
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>언어설정</DialogTitle>
+          <DialogTitle>언어 설정</DialogTitle>
           <DialogDescription className="sr-only">
-            언어설정 Dialog 입니다.
+            언어 설정 Dialog입니다.
           </DialogDescription>
         </DialogHeader>
 
         <RadioGroup
           value={selectedLanguage}
-          onValueChange={setSelectedLanguage}
+          onValueChange={setSelectedLanguage} // 사용자가 선택한 값만 변경 (즉시 반영 X)
         >
-          {languages.map(({ value, label }, index) => (
+          {languageOptions.map(({ value, label }) => (
             <div key={value} className="flex items-center space-x-2">
-              <RadioGroupItem value={value} id={`r${index + 1}`} />
-              <Label htmlFor={`r${index + 1}`}>{label}</Label>
+              <RadioGroupItem value={value} id={`r-${value}`} />
+              <Label htmlFor={`r-${value}`}>{label}</Label>
             </div>
           ))}
         </RadioGroup>
