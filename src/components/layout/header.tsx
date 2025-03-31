@@ -1,14 +1,14 @@
 "use client";
 
+import { LanguageDialog } from "@/components/language-dialog";
 import Inner from "@/components/layout/inner";
-import { Button } from "@/components/ui/button";
+import { LoginDialog } from "@/components/login-dialog";
 import { Input } from "@/components/ui/input";
-import { GlobeIcon } from "lucide-react";
 import Link from "next/link";
 import { forwardRef } from "react";
 
 const NAV_ITEMS = [
-  { href: "", label: "소개" },
+  { href: "/readme", label: "소개" },
   { href: "", label: "커뮤니티" },
 ];
 
@@ -38,13 +38,8 @@ const Header = forwardRef<
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" className="text-sm">
-              <GlobeIcon />
-              한국어
-            </Button>
-            <Button variant="default" className="text-sm">
-              로그인
-            </Button>
+            <LanguageDialog />
+            <LoginDialog />
           </div>
         </div>
       </Inner>

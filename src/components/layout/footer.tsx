@@ -16,7 +16,7 @@ const footerSections = [
     title: "kwak.dev",
     href: "/",
     items: [
-      { name: "사이트 소개", href: "/" },
+      { name: "사이트 소개", href: "/readme" },
       { name: "사이트 피드", href: "/" },
       { name: "블로그", href: "/" },
     ],
@@ -30,35 +30,22 @@ const footerSections = [
     title: "고객센터",
     href: "/",
     items: [
-      { name: "고객센터", href: "/" },
       { name: "자주 묻는 질문", href: "/" },
       { name: "문의하기", href: "/" },
-      { name: "이용약관", href: "/" },
-      { name: "개인정보처리방침", href: "/" },
     ],
-  },
-  {
-    title: "테스트",
-    href: "/",
-    items: [{ name: "테스트 소개", href: "/" }],
   },
   {
     title: "커뮤니티",
     href: "/",
     items: [{ name: "커뮤니티 소개", href: "/" }],
   },
-  { title: "개발자", href: "/", items: [{ name: "개발자 소개", href: "/" }] },
+
   {
     title: "Get the app",
     href: "/",
     items: [{ name: "앱 다운로드", href: "/" }],
   },
-  {
-    title: "소셜 미디어",
-    href: "/",
-    items: [{ name: "소셜 미디어", href: "/" }],
-  },
-  { title: "뉴스레터", href: "/", items: [{ name: "뉴스레터", href: "/" }] },
+  { title: "개발자", href: "/", items: [{ name: "개발자 소개", href: "/" }] },
 ];
 
 // Footer links data
