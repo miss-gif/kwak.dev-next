@@ -30,7 +30,7 @@ const GlobalNav = ({
       <Inner>
         <div className="flex items-center gap-8 py-2">
           <div
-            className="flex justify-center items-center flex-col text-xs cursor-pointer gap-1"
+            className="flex justify-center items-center flex-col text-xs  gap-1"
             onClick={handleSearchClick}
           >
             <SearchIcon size={18} />
@@ -45,7 +45,7 @@ const GlobalNav = ({
                   key={href}
                   href={href}
                   className={`text-center text-xs hover:underline  ${
-                    isActive ? "font-bold" : ""
+                    isActive ? "font-bold" : "font-normal"
                   }`}
                 >
                   {label}

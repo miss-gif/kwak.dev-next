@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -45,7 +46,9 @@ export function LanguageDialog() {
         </RadioGroup>
 
         <DialogFooter>
-          <Button type="submit">변경</Button>
+          <DialogClose asChild>
+            <Button type="submit">변경</Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
