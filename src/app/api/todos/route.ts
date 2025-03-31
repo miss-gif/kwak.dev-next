@@ -1,5 +1,5 @@
+import { fetchTodos } from "@/lib/firebase";
 import { NextRequest, NextResponse } from "next/server";
-import { fetchTodos } from "../../../../firebaseConfig";
 
 // toto 목록 조회
 export async function GET() {

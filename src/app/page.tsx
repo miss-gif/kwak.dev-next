@@ -1,3 +1,11 @@
-export default function Page() {
-  return <div>메인</div>;
+import { useTranslations } from "next-intl";
+
+export default function HomePage() {
+  const t = useTranslations("HomePage");
+  return (
+    <>
+      <h1>{t("title")}</h1>
+      <h1>{t("description")}</h1>
+    </>
+  );
 }
