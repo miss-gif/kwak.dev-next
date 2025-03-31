@@ -12,14 +12,28 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { GlobeIcon } from "lucide-react";
+import { useState } from "react";
 
 export function LanguageDialog() {
+  const [languageValue, setLanguageValue] = useState("한국어");
+  const [selectedLanguage, setSelectedLanguage] = useState(languageValue);
+
+  const handleLanguageChange = () => {
+    setLanguageValue(selectedLanguage);
+  };
+
+  const languages = [
+    { value: "한국어", label: "한국어" },
+    { value: "English", label: "English" },
+    { value: "日本語", label: "日本語" },
+  ];
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost" className="text-sm">
           <GlobeIcon />
-          한국어
+          {languageValue}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -30,24 +44,21 @@ export function LanguageDialog() {
           </DialogDescription>
         </DialogHeader>
 
-        <RadioGroup defaultValue="default">
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="default" id="r1" />
-            <Label htmlFor="r1">한국어</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="comfortable" id="r2" />
-            <Label htmlFor="r2">English</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="compact" id="r3" />
-            <Label htmlFor="r3">日本語</Label>
-          </div>
+        <RadioGroup
+          value={selectedLanguage}
+          onValueChange={setSelectedLanguage}
+        >
+          {languages.map(({ value, label }, index) => (
+            <div key={value} className="flex items-center space-x-2">
+              <RadioGroupItem value={value} id={`r${index + 1}`} />
+              <Label htmlFor={`r${index + 1}`}>{label}</Label>
+            </div>
+          ))}
         </RadioGroup>
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit">변경</Button>
+            <Button onClick={handleLanguageChange}>변경</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
