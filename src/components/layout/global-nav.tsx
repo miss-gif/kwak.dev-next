@@ -1,28 +1,35 @@
+"use client";
+
 import Inner from "@/components/layout/inner";
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
+import { RefObject } from "react";
 
 const navItems = [
   { href: "/", label: "전체" },
-  { href: "/projects", label: "프로젝트" },
-  { href: "/interviews", label: "인터뷰" },
-  { href: "/timeline", label: "타임라인" },
-  { href: "/gallery", label: "갤러리" },
-  { href: "/stats", label: "통계" },
-  { href: "/board", label: "게시판" },
-  { href: "/attendance", label: "출석체크" },
-  { href: "/points", label: "포인트" },
-  { href: "/preview", label: "프리뷰" },
   { href: "/todos", label: "Todos" },
 ];
 
-const GlobalNav = () => {
+const GlobalNav = ({
+  inputRef,
+}: {
+  inputRef: RefObject<HTMLInputElement | null>; // 🔥 null 허용
+}) => {
+  const handleSearchClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   return (
     <div className="border-b border-b-slate-200">
       <Inner>
         <div className="flex items-center gap-8 py-2">
-          <div className="flex justify-center items-center flex-col text-xs font-bold text-slate-500 hover:text-slate-900 cursor-pointer">
-            <SearchIcon />
+          <div
+            className="flex justify-center items-center flex-col text-xs cursor-pointer gap-1"
+            onClick={handleSearchClick}
+          >
+            <SearchIcon size={18} />
             검색
           </div>
           <nav className="flex gap-8">
@@ -30,7 +37,7 @@ const GlobalNav = () => {
               <Link
                 key={href}
                 href={href}
-                className="hover:underline text-center"
+                className="hover:underline text-center text-xs"
               >
                 {label}
               </Link>

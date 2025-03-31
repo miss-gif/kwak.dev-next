@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
+import Footer from "@/components/layout/footer";
+import HeaderWrap from "@/components/layout/header-wrap";
+import Inner from "@/components/layout/inner";
+import TopBanner from "@/components/layout/top-banner";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
-import TopBanner from "@/components/layout/top-banner";
-import GlobalNav from "@/components/layout/global-nav";
-import Inner from "@/components/layout/inner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,8 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TopBanner />
-        <Header />
-        <GlobalNav />
+        <HeaderWrap />
         <Inner className="min-h-dvh">
           <main>{children}</main>
         </Inner>

@@ -1,15 +1,21 @@
+"use client";
+
 import Inner from "@/components/layout/inner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { GlobeIcon } from "lucide-react";
 import Link from "next/link";
+import { forwardRef } from "react";
 
 const NAV_ITEMS = [
   { href: "", label: "소개" },
   { href: "", label: "커뮤니티" },
 ];
 
-const Header = () => {
+const Header = forwardRef<
+  HTMLInputElement,
+  React.HTMLAttributes<HTMLDivElement>
+>((_, ref) => {
   return (
     <header>
       <Inner>
@@ -28,7 +34,7 @@ const Header = () => {
             </ul>
 
             <div className="flex-1">
-              <Input className="w-full" />
+              <Input className="w-full" ref={ref} />
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -44,6 +50,8 @@ const Header = () => {
       </Inner>
     </header>
   );
-};
+});
+
+Header.displayName = "Header"; // forwardRef 사용 시 필요한 displayName 설정
 
 export default Header;
