@@ -1,15 +1,6 @@
 import Inner from "@/components/layout/inner";
+import { getHeaderData } from "@/i18n/request";
 import Link from "next/link";
-
-const navLinks = [
-  { href: "", label: "WebSite" },
-  { href: "", label: "Blog" },
-];
-
-const actionLinks = [
-  { href: "", label: "문의" },
-  { href: "", label: "관리자" },
-];
 
 const LinkList = ({ links }: { links: { href: string; label: string }[] }) => (
   <ul className="flex gap-4">
@@ -23,7 +14,10 @@ const LinkList = ({ links }: { links: { href: string; label: string }[] }) => (
   </ul>
 );
 
-const TopBanner = () => {
+const TopBanner = async () => {
+  const headerData = await getHeaderData();
+  const { navLinks, actionLinks } = headerData.TopBanner;
+
   return (
     <div className="border-b border-b-slate-200 bg-white">
       <Inner>

@@ -1,0 +1,12 @@
+{
+  "TopBanner": {
+    "navLinks": [
+      { "href": "/website", "label": "website" },
+      { "href": "/blog", "label": "blog" }
+    ],
+    "actionLinks": [
+      { "href": "/contact", "label": "contact" },
+      { "href": "/admin", "label": "admin" }
+    ]
+  }
+}

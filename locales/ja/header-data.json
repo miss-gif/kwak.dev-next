@@ -1,0 +1,12 @@
+{
+  "TopBanner": {
+    "navLinks": [
+      { "href": "/website", "label": "ウェブサイト" },
+      { "href": "/blog", "label": "ブログ" }
+    ],
+    "actionLinks": [
+      { "href": "/contact", "label": "お問い合わせ" },
+      { "href": "/admin", "label": "管理者" }
+    ]
+  }
+}
