@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import dummyData from "@/data/dummy.json"; // JSON 파일 import
+import { fetchTodos } from "../../../../firebaseConfig";
 
 // toto 목록 조회
 export async function GET() {
+  const fetchedTodos = await fetchTodos(); // Firebase에서 todos 데이터 가져오기
+
   const response = {
-    message: "Fetching todos data", // API 메시지
-    data: dummyData, // 샘플 데이터
+    message: "Fetching todos data1231111111111", // API 메시지
+    data: fetchedTodos, // 샘플 데이터
   };
 
   return NextResponse.json(response, { status: 200 }); // 상태 코드 200 응답
