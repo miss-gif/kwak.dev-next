@@ -1,17 +1,51 @@
 "use client";
+import { useEffect, useState } from "react";
 
-import AddCreateButton from "@/app/notice/components/AddCreateButton";
+// actions
+import { createTodo, getTodos, TodosRow } from "@/app/actions/todos-action";
+
+// scss
 import styles from "./SideNavigation.module.scss";
+
+// sahdcn/ui
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dot, Search } from "lucide-react";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
-import { getTodos, TodosRow } from "@/app/actions/todos-action";
+import { useRouter } from "next/navigation";
 
 function SideNavigation() {
-  const [todos, setTodos] = useState<TodosRow[] | null>([]);
+  // 라우터 이동
+  const router = useRouter();
 
+  const [todos, setTodos] = useState<TodosRow[] | null>([]);
+  // create
+  const onCreate = async () => {
+    const { data, error, status } = await createTodo({
+      title: "",
+      contents: JSON.stringify([]),
+      start_date: new Date().toISOString(),
+      end_date: new Date().toISOString(),
+    });
+    // 에러 발생시
+    if (error) {
+      toast.error("데이터 추가 실패", {
+        description: `데이터 추가에 실패하였습니다. ${error.message}`,
+        duration: 3000,
+      });
+      return;
+    }
+    // 최종 데이터
+    toast.success("데이터 추가 성공", {
+      description: "데이터 추가에 성공하였습니다",
+      duration: 3000,
+    });
+    console.log("등록된 id ", data.id);
+    // 데이터 추가 성공시 할일 등록창으로 이동시킴
+    // http://localhost:3000/create/ [data.id] 로 이동
+    router.push(`/create/${data.id}`);
+  };
+  // read
   const fetchGetTodos = async () => {
     const { data, error, status } = await getTodos();
     // 에러 발생시
@@ -49,7 +83,13 @@ function SideNavigation() {
       </div>
       {/* page 추가 버튼 */}
       <div className={styles.container_buttonBox}>
-        <AddCreateButton />
+        <Button
+          variant={"outline"}
+          className="w-full text-orange-500 border-orange-400 hover:bg-orange-50 hover:text-orange-500"
+          onClick={onCreate}
+        >
+          Add New Page
+        </Button>
       </div>
       {/* 추가 항목 출력 영역 */}
       <div className={styles.container_todos}>
@@ -61,7 +101,9 @@ function SideNavigation() {
               className="flex items-center py-2 bg-[#f5f5f4] rounded-sm cursor-pointer"
             >
               <Dot className="mr-1 text-green-400" />
-              <span className="text-sm">{item.title}</span>
+              <span className="text-sm">
+                {item.title ? item.title : "No Title"}
+              </span>
             </div>
           ))}
         </div>
