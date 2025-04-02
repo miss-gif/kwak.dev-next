@@ -43,7 +43,7 @@ function SideNavigation() {
     console.log("등록된 id ", data.id);
     // 데이터 추가 성공시 할일 등록창으로 이동시킴
     // http://localhost:3000/create/ [data.id] 로 이동
-    router.push(`/create/${data.id}`);
+    router.push(`notice/create/${data.id}`);
   };
   // read
   const fetchGetTodos = async () => {
