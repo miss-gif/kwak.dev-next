@@ -8,6 +8,7 @@ import ViewerNote from "@/app/note/components/viewer-note";
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { supabase } from "../../../utils/supabase/client";
 import { Database } from "../../../types_db";
+import BackButton from "@/components/back-button";
 
 export default function Page() {
   // 활성화된 노트의 ID를 저장하는 상태
@@ -79,6 +80,7 @@ export default function Page() {
 
   return (
     <div className="w-full flex flex-col">
+      <BackButton />
       <Header />
       <div className="grow flex">
         <Sidebar
