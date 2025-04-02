@@ -5,23 +5,30 @@ import Header from "@/app/note/components/header";
 import NewNote from "@/app/note/components/new-note";
 import Sidebar from "@/app/note/components/sidebar";
 import ViewerNote from "@/app/note/components/viewer-note";
-import { useState, useMemo } from "react";
-
-export type Note = {
-  id: number | null;
-  title: string;
-  content: string;
-};
-
-const notes: Note[] = [
-  { id: 1, title: "노트1", content: "노트1 내용" },
-  { id: 2, title: "노트2", content: "노트2 내용" },
-  { id: 3, title: "노트3", content: "노트3 내용" },
-];
+import { useState, useMemo, useEffect } from "react";
+import { supabase } from "../../../utils/supabase/client";
+import { Database } from "../../../types_db";
 
 export default function Page() {
   const [activeNoteId, setActiveNoteId] = useState<number | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [notes, setNotes] = useState<
+    Database["public"]["Tables"]["note"]["Row"][]
+  >([]);
+
+  const fetchNotes = async () => {
+    const { data, error } = await supabase.from("note").select("*");
+    if (error) {
+      console.error("Error fetching notes:", error);
+      return;
+    } else {
+      setNotes(data || []);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
 
   const activeNote = useMemo(
     () =>
@@ -30,12 +37,18 @@ export default function Page() {
         title: "",
         content: "",
       },
-    [activeNoteId]
+    [activeNoteId, notes]
   );
 
   const renderContent = () => {
     if (isCreating) {
-      return <NewNote setIsCreating={setIsCreating} />;
+      return (
+        <NewNote
+          fetchNotes={fetchNotes}
+          setIsCreating={setIsCreating}
+          setActiveNoteId={setActiveNoteId}
+        />
+      );
     }
     if (activeNoteId) {
       return <ViewerNote note={activeNote} />;
