@@ -5,9 +5,15 @@ interface SidebarProps {
   notes: Note[];
   setIsCreating: (isCreating: boolean) => void;
   setActiveNoteId: (id: number | null) => void;
+  activeNoteId: number | null;
 }
 
-const Sidebar = ({ notes, setIsCreating, setActiveNoteId }: SidebarProps) => {
+const Sidebar = ({
+  notes,
+  setIsCreating,
+  setActiveNoteId,
+  activeNoteId,
+}: SidebarProps) => {
   const handleCreateNote = () => {
     setIsCreating(true);
     setActiveNoteId(null);
@@ -26,7 +32,13 @@ const Sidebar = ({ notes, setIsCreating, setActiveNoteId }: SidebarProps) => {
       <ul className="space-y-1">
         {notes.map(({ id, title }) => (
           <li key={id}>
-            <Button variant="ghost" onClick={() => handleSelectNote(id)}>
+            <Button
+              className={`${
+                activeNoteId === id ? "font-semibold" : "font-medium"
+              }`}
+              variant="ghost"
+              onClick={() => handleSelectNote(id)}
+            >
               {title}
             </Button>
           </li>

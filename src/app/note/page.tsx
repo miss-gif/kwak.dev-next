@@ -51,6 +51,7 @@ export default function Page() {
           notes={notes}
           setIsCreating={setIsCreating}
           setActiveNoteId={setActiveNoteId}
+          activeNoteId={activeNoteId}
         />
         {renderContent()}
       </div>

@@ -4,7 +4,7 @@ import { Note } from "@/app/note/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ViewerNote = ({ note }: { note: Note }) => {
   const [title, setTitle] = useState(note?.title);
@@ -26,6 +26,12 @@ const ViewerNote = ({ note }: { note: Note }) => {
     // Add delete logic here
     setIsEditing(false);
   };
+
+  useEffect(() => {
+    setTitle(note?.title);
+    setContent(note?.content);
+    setIsEditing(false);
+  }, [note]);
 
   return (
     <div className="w-full p-4 space-y-2">
