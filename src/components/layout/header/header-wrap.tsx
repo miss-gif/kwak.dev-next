@@ -1,16 +1,16 @@
 "use client";
 
-import GlobalNav from "@/components/layout/header/global-nav";
-import Header from "@/components/layout/header/header";
-import React, { useRef } from "react";
+import HeaderBottom from "@/components/layout/header/header-bottom";
+import HeaderTop from "@/components/layout/header/header-top";
+import { useRef } from "react";
 
 const HeaderWrap = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="sticky top-0 left-0 z-10 w-full bg-white dark:bg-black">
-      <Header ref={inputRef} />
-      <GlobalNav inputRef={inputRef} />
+      <HeaderTop ref={inputRef} />
+      <HeaderBottom inputRef={inputRef} />
     </div>
   );
 };

@@ -7,13 +7,13 @@ import { usePathname } from "next/navigation"; // 현재 경로 감지
 import { RefObject } from "react";
 
 const navItems = [
-  { href: "/", label: "전체" },
+  { href: "/", label: "홈" },
   { href: "/todos", label: "Todos" },
   { href: "/test", label: "Test" },
   { href: "/note", label: "note" },
 ];
 
-const GlobalNav = ({
+const HeaderBottom = ({
   inputRef,
 }: {
   inputRef: RefObject<HTMLInputElement | null>;
@@ -60,4 +60,4 @@ const GlobalNav = ({
   );
 };
 
-export default GlobalNav;
+export default HeaderBottom;

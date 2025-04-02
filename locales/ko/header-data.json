@@ -8,5 +8,23 @@
       { "href": "/contact", "label": "문의" },
       { "href": "/admin", "label": "관리자" }
     ]
+  },
+  "HeaderTop": {
+    "NAV_ITEMS": [
+      { "href": "/readme", "label": "소개" },
+      { "href": "", "label": "커뮤니티" }
+    ],
+    "actionLinks": [
+      { "href": "/contact", "label": "문의" },
+      { "href": "/admin", "label": "관리자" }
+    ]
+  },
+  "HeaderBottom": {
+    "navItems": [
+      { "href": "/", "label": "홈" },
+      { "href": "/todos", "label": "Todos" },
+      { "href": "/test", "label": "Test" },
+      { "href": "/note", "label": "note" }
+    ]
   }
 }
