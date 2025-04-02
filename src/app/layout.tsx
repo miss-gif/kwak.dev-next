@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Footer from "@/components/layout/footer";
-import HeaderWrap from "@/components/layout/header-wrap";
+import HeaderWrap from "@/components/layout/header/header-wrap";
 import Inner from "@/components/layout/inner";
-import TopBanner from "@/components/layout/top-banner";
+import TopBanner from "@/components/layout/header/top-banner";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";

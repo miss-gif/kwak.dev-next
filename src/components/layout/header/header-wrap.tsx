@@ -1,7 +1,7 @@
 "use client";
 
-import GlobalNav from "@/components/layout/global-nav";
-import Header from "@/components/layout/header";
+import GlobalNav from "@/components/layout/header/global-nav";
+import Header from "@/components/layout/header/header";
 import React, { useRef } from "react";
 
 const HeaderWrap = () => {

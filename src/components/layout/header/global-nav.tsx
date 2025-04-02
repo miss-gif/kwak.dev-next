@@ -10,6 +10,7 @@ const navItems = [
   { href: "/", label: "전체" },
   { href: "/todos", label: "Todos" },
   { href: "/test", label: "Test" },
+  { href: "/note", label: "note" },
 ];
 
 const GlobalNav = ({
