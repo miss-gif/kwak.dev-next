@@ -1,18 +1,35 @@
 "use client";
 
-import { Note } from "@/app/note/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import React, { useEffect, useState } from "react";
+import { supabase } from "../../../../utils/supabase/client";
 
-const ViewerNote = ({ note }: { note: Note }) => {
+const ViewerNote = ({ note, setActiveNoteId, fetchNotes }) => {
   const [title, setTitle] = useState(note?.title);
   const [content, setContent] = useState(note?.content);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleSave = () => {
-    // Add save logic here
+  const handleSave = async () => {
+    if (!title || !content) {
+      alert("제목과 내용을 입력하세요.");
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("note")
+      .update({ title, content })
+      .eq("id", note?.id)
+      .select();
+
+    if (error) {
+      console.error("Error saving note:", error);
+      return;
+    }
+
+    fetchNotes(); // 노트 목록 새로고침
+    setActiveNoteId(data[0].id); // 새로 생성된 노트를 활성화
     setIsEditing(false);
   };
 
@@ -22,9 +39,17 @@ const ViewerNote = ({ note }: { note: Note }) => {
     setIsEditing(false);
   };
 
-  const handleDelete = () => {
-    // Add delete logic here
+  const handleDelete = async () => {
+    const { error } = await supabase.from("note").delete().eq("id", note?.id);
+
+    if (error) {
+      console.error("Error saving note:", error);
+      return;
+    }
+
+    setActiveNoteId(null); // 노트 삭제 후 활성화된 노트 ID를 null로 설정
     setIsEditing(false);
+    fetchNotes(); // 노트 목록 새로고침
   };
 
   useEffect(() => {

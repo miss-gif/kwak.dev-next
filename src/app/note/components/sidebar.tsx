@@ -1,19 +1,14 @@
-import { Note } from "@/app/note/page";
 import { Button } from "@/components/ui/button";
-
-interface SidebarProps {
-  notes: Note[];
-  setIsCreating: (isCreating: boolean) => void;
-  setActiveNoteId: (id: number | null) => void;
-  activeNoteId: number | null;
-}
+import { Input } from "@/components/ui/input";
 
 const Sidebar = ({
   notes,
   setIsCreating,
   setActiveNoteId,
   activeNoteId,
-}: SidebarProps) => {
+  search,
+  setSearch,
+}) => {
   const handleCreateNote = () => {
     setIsCreating(true);
     setActiveNoteId(null);
@@ -29,6 +24,16 @@ const Sidebar = ({
       <Button className="w-full" onClick={handleCreateNote}>
         + 새로운 노트
       </Button>
+
+      <Input
+        type="text"
+        placeholder="노트를 검색해보세요"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+      />
+
       <ul className="space-y-1">
         {notes.map(({ id, title }) => (
           <li key={id}>
