@@ -11,6 +11,7 @@ const navItems = [
   { href: "/todos", label: "Todos" },
   { href: "/test", label: "Test" },
   { href: "/note", label: "note" },
+  { href: "/notice", label: "notice" },
 ];
 
 const HeaderBottom = ({
