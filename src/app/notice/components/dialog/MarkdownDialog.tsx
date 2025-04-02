@@ -28,11 +28,11 @@ function MarkdownDialog() {
 
   // 에디터의 제목/본문 내용
   const [title, setTitle] = useState<string | undefined>("");
-  const [content, setContent] = useState<string | undefined>("");
+  const [contents, setContents] = useState<string | undefined>("");
 
   // todo 작성
   const onSubmit = async () => {
-    if (!title || !content) {
+    if (!title || !contents) {
       toast.error("입력항목을 확인해 주세요.", {
         description: "제목과 내용을 입력해주세요.",
         duration: 3000,
@@ -42,7 +42,7 @@ function MarkdownDialog() {
 
     // 서버액션 실행하기
     const { data, error, status } = await createTodo({
-      content: content,
+      contents: contents,
       title: title,
     });
 
@@ -62,7 +62,7 @@ function MarkdownDialog() {
     // 창닫기
     setOpen(false);
     setTitle("");
-    setContent("");
+    setContents("");
   };
 
   return (
@@ -94,7 +94,7 @@ function MarkdownDialog() {
           <Separator />
           {/* 마크다운 입력 영역 */}
           <div className={styles.dialog_markdown}>
-            <MDEditor height={"100%"} value={content} onChange={setContent} />
+            <MDEditor height={"100%"} value={contents} onChange={setContents} />
           </div>
         </DialogHeader>
         <DialogFooter>
