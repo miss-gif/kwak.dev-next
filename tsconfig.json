@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "noImplicitAny": false, // 암시적 any 타입을 허용
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
