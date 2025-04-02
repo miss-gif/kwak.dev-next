@@ -14,7 +14,12 @@ import { Dot, Search } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+import { useAtom } from "jotai";
+import { sidebarStateAtom } from "@/app/store";
+
 function SideNavigation() {
+  // jotai 상태 사용하기
+  const [sidebarState, setSideState] = useAtom(sidebarStateAtom);
   // 라우터 이동
   const router = useRouter();
 
@@ -42,8 +47,9 @@ function SideNavigation() {
     });
     console.log("등록된 id ", data.id);
     // 데이터 추가 성공시 할일 등록창으로 이동시킴
-    // http://localhost:3000/create/ [data.id] 로 이동
-    router.push(`notice/create/${data.id}`);
+    // http://localhost:3000/notice/create/ [data.id] 로 이동
+
+    router.push(`/notice/create/${data.id}`);
   };
   // read
   const fetchGetTodos = async () => {
@@ -61,13 +67,20 @@ function SideNavigation() {
       description: "데이터조회에 성공하였습니다",
       duration: 3000,
     });
-
+    setSideState("default");
     setTodos(data);
   };
 
   useEffect(() => {
-    fetchGetTodos();
-  }, []);
+    if (sidebarState !== "default") {
+      fetchGetTodos();
+
+      if (sidebarState === "delete") {
+        router.push("/");
+      }
+    }
+  }, [sidebarState]);
+
   return (
     <div className={styles.container}>
       {/* 검색창 */}
@@ -102,7 +115,7 @@ function SideNavigation() {
             <div
               key={item.id}
               className="flex items-center py-2 bg-[#f5f5f4] rounded-sm cursor-pointer"
-              onClick={() => router.push(`/create/${item.id}`)}
+              onClick={() => router.push(`/notice/create/${item.id}`)}
             >
               <Dot className="mr-1 text-green-400" />
               <span className="text-sm">
