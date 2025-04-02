@@ -4,76 +4,97 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[];
+  | Json[]
 
 export type Database = {
   public: {
     Tables: {
+      blog: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: number
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          title?: string
+        }
+        Relationships: []
+      }
       note: {
         Row: {
-          content: string;
-          created_at: string;
-          id: number;
-          title: string;
-        };
+          content: string
+          created_at: string
+          id: number
+          title: string
+        }
         Insert: {
-          content: string;
-          created_at?: string;
-          id?: number;
-          title: string;
-        };
+          content: string
+          created_at?: string
+          id?: number
+          title: string
+        }
         Update: {
-          content?: string;
-          created_at?: string;
-          id?: number;
-          title?: string;
-        };
-        Relationships: [];
-      };
+          content?: string
+          created_at?: string
+          id?: number
+          title?: string
+        }
+        Relationships: []
+      }
       todos: {
         Row: {
-          contents: string;
-          created_at: string;
-          end_date: string | null;
-          id: number;
-          start_date: string | null;
-          title: string;
-        };
+          contents: string
+          created_at: string
+          end_date: string | null
+          id: number
+          start_date: string | null
+          title: string
+        }
         Insert: {
-          contents: string;
-          created_at?: string;
-          end_date?: string | null;
-          id?: number;
-          start_date?: string | null;
-          title: string;
-        };
+          contents: string
+          created_at?: string
+          end_date?: string | null
+          id?: number
+          start_date?: string | null
+          title: string
+        }
         Update: {
-          contents?: string;
-          created_at?: string;
-          end_date?: string | null;
-          id?: number;
-          start_date?: string | null;
-          title?: string;
-        };
-        Relationships: [];
-      };
-    };
+          contents?: string
+          created_at?: string
+          end_date?: string | null
+          id?: number
+          start_date?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+    }
     Views: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Functions: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Enums: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     CompositeTypes: {
-      [_ in never]: never;
-    };
-  };
-};
+      [_ in never]: never
+    }
+  }
+}
 
-type PublicSchema = Database[Extract<keyof Database, "public">];
+type PublicSchema = Database[Extract<keyof Database, "public">]
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -86,7 +107,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R;
+      Row: infer R
     }
     ? R
     : never
@@ -94,11 +115,11 @@ export type Tables<
         PublicSchema["Views"])
     ? (PublicSchema["Tables"] &
         PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-        Row: infer R;
+        Row: infer R
       }
       ? R
       : never
-    : never;
+    : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -109,17 +130,17 @@ export type TablesInsert<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I;
+      Insert: infer I
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Insert: infer I;
+        Insert: infer I
       }
       ? I
       : never
-    : never;
+    : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -130,17 +151,17 @@ export type TablesUpdate<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U;
+      Update: infer U
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U;
+        Update: infer U
       }
       ? U
       : never
-    : never;
+    : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -153,14 +174,14 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-    : never;
+    : never
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof PublicSchema["CompositeTypes"]
     | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof Database
   }
     ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
@@ -168,4 +189,4 @@ export type CompositeTypes<
   ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never;
+    : never
