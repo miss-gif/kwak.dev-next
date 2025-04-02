@@ -1,7 +1,8 @@
-import styles from "./page.module.scss";
 import BasicBoard from "@/app/notice/components/board/BasicBoard";
-
 import { Progress } from "@/components/ui/progress";
+import styles from "./page.module.scss";
+import { Button } from "@/components/ui/button";
+import LabelCalendar from "@/app/notice/components/calendar/LabelCalendar";
 
 function Page() {
   return (
@@ -25,7 +26,18 @@ function Page() {
             />
           </div>
           {/* 캘린더 선택 추가 */}
-          <div className={styles.calendarBox}>캘린터 선택 버튼</div>
+          <div className={styles.calendarBox}>
+            <div className={styles.calendarBox_calendar}>
+              <LabelCalendar label="From" required={true} />
+              <LabelCalendar label="To" required={true} />
+            </div>
+            <Button
+              variant={"outline"}
+              className="w-[15%] text-white bg-orange-400 border-orange-500 hover:bg-orange-400 hover:text-white cursor-pointer"
+            >
+              Add New Board
+            </Button>
+          </div>
         </div>
       </header>
       {/* 본문 */}

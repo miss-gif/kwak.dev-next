@@ -1,7 +1,9 @@
+import LabelCalendar from "@/app/notice/components/calendar/LabelCalendar";
 import styles from "./BasicBoard.module.scss";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronUp } from "lucide-react";
+import MarkdownDialog from "@/app/notice/components/dialog/MarkdownDialog";
 
 function BasicBoard() {
   return (
@@ -20,8 +22,9 @@ function BasicBoard() {
       </div>
       {/* 본문 */}
       <div className={styles.container_body}>
-        <div className={styles.container_body_calendarBax}>
-          캘린더 선택 버튼 작성예정
+        <div className={styles.container_body_calendarBox}>
+          <LabelCalendar label="From" required={false} />
+          <LabelCalendar label="To" required={true} />
         </div>
         <div className={styles.container_body_buttonBox}>
           <Button
@@ -38,6 +41,7 @@ function BasicBoard() {
           </Button>
         </div>
       </div>
+      <MarkdownDialog />
       {/* 하단 */}
       <div className={styles.container_footer}></div>
     </div>
