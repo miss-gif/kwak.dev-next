@@ -30,6 +30,27 @@ export type Database = {
         }
         Relationships: []
       }
+      todos: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: number
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
