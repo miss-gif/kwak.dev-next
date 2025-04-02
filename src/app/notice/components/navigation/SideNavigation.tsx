@@ -93,12 +93,16 @@ function SideNavigation() {
       </div>
       {/* 추가 항목 출력 영역 */}
       <div className={styles.container_todos}>
-        <div className={styles.container_todos_label}>Your Todo</div>
+        <div className={styles.container_todos_label}>
+          {/* 로그아웃 버튼 배치 */}
+          {"홍길동"}님 Your Todo
+        </div>
         <div className={styles.container_todos_list}>
           {todos!.map((item) => (
             <div
               key={item.id}
               className="flex items-center py-2 bg-[#f5f5f4] rounded-sm cursor-pointer"
+              onClick={() => router.push(`/create/${item.id}`)}
             >
               <Dot className="mr-1 text-green-400" />
               <span className="text-sm">
