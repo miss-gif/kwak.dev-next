@@ -8,17 +8,28 @@ import { createTodo, getTodos, TodosRow } from "@/app/actions/todos-action";
 import styles from "./SideNavigation.module.scss";
 
 // sahdcn/ui
-import { sidebarStateAtom } from "@/app/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAtom } from "jotai";
 import { Dot, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { sidebarStateAtom } from "@/app/store";
 import { signOut } from "../../../../../utils/supabase/actions";
-// import { signOut } from "@/lib/supabase/actions";
 
-function SideNavigation() {
+// zustand
+import { useUserStore } from "@/app/store/useUserStore";
+import { User } from "@supabase/supabase-js";
+
+function SideNavigation({ user }: { user: User | null }) {
+  const { name, email, setUser } = useUserStore();
+  // zustand 업데이트
+  useEffect(() => {
+    if (user) {
+      setUser(user.user_metadata.full_name, user.email!, user.id);
+    }
+  }, []);
+
   // jotai 상태 사용하기
   const [sidebarState, setSideState] = useAtom(sidebarStateAtom);
   // 라우터 이동
@@ -121,7 +132,7 @@ function SideNavigation() {
       <div className={styles.container_todos}>
         <div className={styles.container_todos_label}>
           {/* 로그아웃 버튼 배치 */}
-          {"홍길동"}님 Your Todo
+          {name}님 Your Todo {email}
         </div>
 
         <div>
