@@ -8,14 +8,15 @@ import { createTodo, getTodos, TodosRow } from "@/app/actions/todos-action";
 import styles from "./SideNavigation.module.scss";
 
 // sahdcn/ui
+import { sidebarStateAtom } from "@/app/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dot, Search } from "lucide-react";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-
 import { useAtom } from "jotai";
-import { sidebarStateAtom } from "@/app/store";
+import { Dot, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { signOut } from "../../../../../utils/supabase/actions";
+// import { signOut } from "@/lib/supabase/actions";
 
 function SideNavigation() {
   // jotai 상태 사용하기
@@ -47,9 +48,9 @@ function SideNavigation() {
     });
     console.log("등록된 id ", data.id);
     // 데이터 추가 성공시 할일 등록창으로 이동시킴
-    // http://localhost:3000/notice/create/ [data.id] 로 이동
+    // http://localhost:3000/create/ [data.id] 로 이동
 
-    router.push(`/notice/create/${data.id}`);
+    router.push(`/create/${data.id}`);
   };
   // read
   const fetchGetTodos = async () => {
@@ -81,6 +82,11 @@ function SideNavigation() {
     }
   }, [sidebarState]);
 
+  const fetchSignOut = async () => {
+    await signOut();
+    router.push("/");
+  };
+
   return (
     <div className={styles.container}>
       {/* 검색창 */}
@@ -106,7 +112,7 @@ function SideNavigation() {
         <Button
           variant={"outline"}
           className="flex-1 text-orange-500 border-orange-400 hover:bg-orange-50 hover:text-orange-500"
-          onClick={() => router.push("/notice/blog")}
+          onClick={() => router.push("/blog")}
         >
           Blog
         </Button>
@@ -117,12 +123,23 @@ function SideNavigation() {
           {/* 로그아웃 버튼 배치 */}
           {"홍길동"}님 Your Todo
         </div>
+
+        <div>
+          <button
+            className="border rounded px-2.5 py-2"
+            type="submit"
+            onClick={fetchSignOut}
+          >
+            Sign Out
+          </button>
+        </div>
+
         <div className={styles.container_todos_list}>
           {todos!.map((item) => (
             <div
               key={item.id}
               className="flex items-center py-2 bg-[#f5f5f4] rounded-sm cursor-pointer"
-              onClick={() => router.push(`/notice/create/${item.id}`)}
+              onClick={() => router.push(`/create/${item.id}`)}
             >
               <Dot className="mr-1 text-green-400" />
               <span className="text-sm">
